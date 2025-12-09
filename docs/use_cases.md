@@ -149,3 +149,42 @@
 | **ОСНОВНИЙ СЦЕНАРІЙ:** | 1. Адміністратор натискає кнопку "Управління користувачами" на головній сторінці. <br/> 2. Адміністратор вводить ім'я користувача в пошуковий рядок. <br/> 3. Адміністратор натискає кнопку "Знайти". <br/>  4. Система здіснює пошук за запитом. <br/> 5. Система відображає шуканого користувача. <br/> 6. Адміністратор натискає кнопку "Заблокувати". <br/> 7. Адміністратор виставляє таймер блокування. <br/> 8. Адміністратор натискає кнопку "Підтвердити". <br/> 9. Система блокує користувача на вказаний період. <br/> 10. Система повідомляє, що користувача успішно заблоковано. |
 
 ![banUserDiagram](//www.plantuml.com/plantuml/png/bLJDRjD06BpdAJw50nSEFN1g46f1of4R3v0sLecQsfNZ827baBGI50aHGCYzW2h42xWc1STnx5UOVIDcFvkwbeWWA-N7k-FvPhvlj7kZeES7uvEXj4R70_Uqv_TEPFym6BmS1A-Uz0wFZtnlxFQVUaFFb-7Ww4LmC1mxBU6Qu0CMo4o8jGdDp9oPAI9pXjnC9mgmI-drwNPhL_1LWOcP8UM_pyAVDN8KICsvjF4TXUL2Z9Lb9__SGaYCH0kTyoWoRmZ9aBI5a4ZmWmmhVcAh1qiXKiMemDScxDnLy8cmdF8JihqJGhBx6ui8Oa71amlkfLeX8J-PvsJ8aNQsy7PfnM9f8UtolQgPtygokA6dQ7ANyH8Bss2wU4--MedW5oBzubvYpI9hcZIX2hpMRlvKEPM9I4MnPHiyrpok5pZYsydBlMxtONzdXqVrUdJmMF05EUbNI12RK1NQmN0ZHR9BU7Cz7pd-Co_esc3zzN1_w3kzFkFdkawDSDo-YhdT-6SAjnfBX6kDJrerGGVKZ8psgChbd1pwiAJL6pELvkjbQhS9nfKT5W6nPTDarWh-AoOV_zGdzwOWhpNDLe36Pgr1Hc5BidoEHKFnbSrwbQ6izFn0pDkDeH7Mdg7W72wiDKQpxggbAbFNsURsy4uxhJrEdZTKwpS0)
+
+<hr />
+
+| **ID:** | <span id="moderatorViewQueue"> ViewQueue </span>|
+|-|-|
+| **НАЗВА:** | Перегляд черги даних (moderatorViewQueue) |
+| **УЧАСНИКИ:** | Модератор, Система |
+| **ПЕРЕДУМОВИ:** | Модератор авторизований у системі |
+| **РЕЗУЛЬТАТ:** | На екрані відображено список даних, що очікують перевірки |
+| **ВИКЛЮЧНІ СИТУАЦІЇ:** | Черга порожня - QueueEmpty <br/> Помилка з'єднання з базою даних - ConnectionError |
+| **ОСНОВНИЙ СЦЕНАРІЙ:** | 1. Модератор обирає вкладку "Модерація" на панелі навігації. <br/> 2. Система надсилає запит до бази даних для отримання записів зі статусом "Pending". <br/> 3. Система формує список файлів (назва, автор, дата завантаження). <br/> 4. Система відображає список даних на екрані модератора. |
+
+![viewQueue](//www.plantuml.com/plantuml/png/ZP9DIiDG58NdNSKZ8xi5Ex3g1jn2RDCsD4rAcWf21_r1Hs9G94xyGH6Sfj5eYKswXNDtvBqXn5eHVOF0U_VUxvoSz-e3JtUzOS-g3BgctTTTlQTs6vvvP7h7UtgZstQTeTtSTop7LPRPxdY7rj2eA5uZt233As8Q8wGfCXgFf92ld5hkjXNkCCSYxxnIMD4CAHAQAYmH8wLpfNsZdL90lbOh0ONW0oCcB1NpM3XQnryZab6kiG1DwOpxVCMyJE42BFcECFzW9Go4J5WexS2mcwRTNbDYrhsGM2EYW8c-64uPwxD4oaSJmQ-nA42quLIMsL9RUCvHBwAzae2GuOqX_avLUHt3vev7nYJLOggqSCbGzewvfC4ZafeG41M59JuaE64fxJUPCi7oKfn-UM1O0uFrRodueVwKCvOqOrMQ58bbI2JF42blJsf_EzwSJSLUZ4GQ9CWlX5n2gzpzvt7nVzHvYf_j9m00)
+
+<hr />
+
+| **ID:** | <span id="moderatorApproveData"> ApproveData </span>|
+|-|-|
+| **НАЗВА:** | Затвердження даних (moderatorApproveData) |
+| **УЧАСНИКИ:** | Модератор, Система |
+| **ПЕРЕДУМОВИ:** | Модератор відкрив сторінку перегляду конкретного файлу |
+| **РЕЗУЛЬТАТ:** | Дані опубліковані в системі та доступні користувачам |
+| **ВИКЛЮЧНІ СИТУАЦІЇ:** | Дані вже оброблені іншим модератором - DataStatusConflict <br/> Помилка запису в базу даних - DatabaseError |
+| **ОСНОВНИЙ СЦЕНАРІЙ:** | 1. Модератор переглядає вміст та опис завантажених даних. <br/> 2. Модератор натискає кнопку "Затвердити". <br/> 3. Система змінює статус даних на "Published". <br/> 4. Система відкриває доступ до файлу для загального завантаження. <br/> 5. Система прибирає запис із черги модерації. <br/> 6. Система повідомляє модератора про успішне затвердження. |
+
+![approveData](//www.plantuml.com/plantuml/png/ZL91Ji905DrpYWbUW8KhC0R5i3Rn18LMQ2WjQQSc9Yo0ngqani16Oxm1gQqsGDihlBcHVxv6oivPTUQ_z_xxxxSTICENuTYf1IFRdHY-CHONVMdVsVB-qkYF1huNkcR7SpnVEFPWA7jEQDK4dIbUK211gcROg0KADPjoGHzM_Rir1TuOb-83ExL4GendWHXxjL9pjH3w1JaozT2gibvPELDpR7yOMm8LAB5LaQXZpUMOfHE24RH-uF-wVDTyAgNOOpEjggzrU-JgaPGPGcegKdE1Bt9JCYyIr74ZwjTXpx63eMLM6hYUj8IlGn4dtUwfsMXGwN3EUkU2C_h43XbYaY7HWcnaz403DO_WLuOqRgGXmw3ZkRUEtJ_aPxacDwkQVoBh2UKmOsaE9q6Xnr0HIhhee7aINKQknoCdANBwNhQETrCWrd9iZcXQh2JbGkWuw7DLtSj_jkzDQcroJV_LDm00)
+
+<hr />
+
+| **ID:** | <span id="moderatorRejectData"> UC-3.3 </span>|
+|-|-|
+| **НАЗВА:** | Відхилення даних (moderatorRejectData) |
+| **УЧАСНИКИ:** | Модератор, Система |
+| **ПЕРЕДУМОВИ:** | Модератор відкрив сторінку перегляду конкретного файлу |
+| **РЕЗУЛЬТАТ:** | Дані відхилені, статус змінено, користувач отримав сповіщення |
+| **ВИКЛЮЧНІ СИТУАЦІЇ:** | Не вказано причину відмови - EmptyReasonError <br/> Дані вже оброблені іншим модератором - DataStatusConflict |
+| **ОСНОВНИЙ СЦЕНАРІЙ:** | 1. Модератор натискає кнопку "Відхилити". <br/> 2. Система відображає спливаюче вікно для введення причини. <br/> 3. Модератор вводить текст причини (наприклад, "Невідповідний вміст"). <br/> 4. Модератор натискає кнопку "Підтвердити". <br/> 5. Система змінює статус даних на "Rejected". <br/> 6. Система генерує сповіщення для автора даних із вказаною причиною. <br/> 7. Система прибирає запис із черги модерації. <br/> 8. Система повідомляє модератора про успішне відхилення. |
+
+![rejectData](//www.plantuml.com/plantuml/png/ZPD1xj9G4CRtdEAbAxc2BaGD5-065HvGAIrf7oOaB40aniH8OWnk94HFW4tH1WgzmioD_CQdfVv922MazCtCx_jcfZHYuqPcFFHhyS0BHcxa3jMpjl5UUsRot6qFUb4u3ZelGZ-CbE_r-kQbFzOrXMjAN-bCAUrvHZj-GsUUJH6mrnzg-VHOqOOa9-Cv7V3hiyBjXFA23hnG3dtYDQMyf8oEb4cYywIi_glsJQeHsbDEksc5ROi1-o5Ew2S9dz-A8Sf1H-p8AqK9FZ0i9mL26R-3t8coAwKRVOcQnOXD_l0VIiY9UA4S6Gd8joRWq5PoSPQ8bX0b3aHb5diwWRkwUnfULpq2zzBT3ZmHf5_uul5fNPc-3f2ruNMzh2jxooYr-odGGYuUx8QQmv6PjBGRXq4pYiAeuiZkEnoL1zgFDGI-G_5m9V65SbwZfuyGaGvaAhpWkI9nM4XRCaTnxhJqAzqskbEALOU96St57m124iCoEdx_RsWAEObT82-k25kRJgdqAI-8D9q_s3pkTiDd9Hwf07zvGUcWutNlVtlib1geml_jDm00)
